@@ -8,6 +8,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\Validator;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -29,11 +30,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        if ($request->authenticate()) {
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
+        // dd(trans('Dashboard/auth.failed'));
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()->back()->withErrors(['name'=>(trans('Dashboard/auth.failed'))]);
+
     }
 
     /**

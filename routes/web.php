@@ -19,10 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout.user');
+// Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
+//     ->middleware('auth')
+//     ->name('logout.user');
 
-Route::post('logout/admin', [AdminController::class, 'destroy'])
-    ->middleware('auth:admin')
-    ->name('logout.admin');
+// Route::post('logout/admin', [AdminController::class, 'destroy'])
+//     ->middleware('auth:admin')
+//     ->name('logout.admin');
