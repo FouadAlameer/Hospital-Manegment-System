@@ -39,6 +39,7 @@ class AdminController extends Controller
         // dd(trans('Dashboard/auth.failed'));
 
         return redirect()->back()->withErrors(['name'=>(trans('Dashboard/auth.failed'))]);
+        // return redirect()->back()->withErrors(['name'=>'admin error']);
 
 
 

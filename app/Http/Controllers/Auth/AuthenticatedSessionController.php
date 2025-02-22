@@ -38,6 +38,7 @@ class AuthenticatedSessionController extends Controller
         // dd(trans('Dashboard/auth.failed'));
 
         return redirect()->back()->withErrors(['name'=>(trans('Dashboard/auth.failed'))]);
+        // return redirect()->back()->withErrors(['name'=>'user error']);
 
     }
 
