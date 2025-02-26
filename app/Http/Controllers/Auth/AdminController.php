@@ -9,9 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
-
-
-
+use function PHPUnit\Framework\throwException;
 
 class AdminController extends Controller
 {
@@ -28,20 +26,18 @@ class AdminController extends Controller
     }
 
 
-    public function store(AdminLoginRequest $request)
+    public function store(Request $request)
     {
-        if ($request->authenticate()) {
-            $request->session()->regenerate();
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-            return redirect()->intended(RouteServiceProvider::ADMIN);
-            
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+            return redirect()->route('dashboard.admin');
         }
-        // dd(trans('Dashboard/auth.failed'));
 
-        return redirect()->back()->withErrors(['name'=>(trans('Dashboard/auth.failed'))]);
-        // return redirect()->back()->withErrors(['name'=>'admin error']);
-
-
+        return back()->withErrors(['email' => 'Invalid credentials']);
 
     }
 

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function () {
-    return 'hhhhhhhhhhhhhhh';
+    return view('welcome');
 });
+
 
 // Route::view('/{path}', 'welcome');
 

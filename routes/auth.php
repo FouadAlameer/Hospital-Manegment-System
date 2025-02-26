@@ -16,26 +16,26 @@ use Illuminate\Support\Facades\Route;
 // ############################ Route User ############################
 
 Route::get('login', [AuthenticatedSessionController::class, 'create'])
-->name('login');
+    ->name('login');
 
 Route::post('login', [AuthenticatedSessionController::class, 'store'])
-->Middleware('guest')->name('login.user');
+    ->name('login.user')->middleware('guest');
 
 Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
-->middleware('auth')
-->name('logout.user');
+    ->name('logout.user')
+    ->middleware('auth');
 
 
 // ############################ Route Admin ############################
 
 Route::post('login/admin', [AdminController::class, 'store'])
-->Middleware('guest')->name('login.admin');
+    ->middleware('guest')->name('login.admin');
 
 Route::post('logout/admin', [AdminController::class, 'destroy'])
-->middleware('auth:admin')
-        ->name('logout.admin');
+    ->middleware('auth:admin')
+    ->name('logout.admin');
 
- // #####################################################################################
+// #####################################################################################
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -43,7 +43,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    
+
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    
+
 
 
 });
